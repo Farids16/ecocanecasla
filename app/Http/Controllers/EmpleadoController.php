@@ -14,7 +14,7 @@ class EmpleadoController extends Controller
     public function index()
     {
         //
-        $datos['empleados']=Empleado::paginate(1);
+        $datos['empleados']=Empleado::paginate(2);
         return view('empleado.index',$datos);
     }
 
@@ -39,10 +39,10 @@ class EmpleadoController extends Controller
         //
 
         $campos=[
-            'Documento'=>'required|string|max:20',
+            'Documento'=>'required|unique:empleados|string|max:20',
             'Nombre'=>'required|string|max:100',
             'Apellido'=>'required|string|max:100',
-            'Correo'=>'required|email',
+            'Correo'=>'required|unique:empleados|email',
             'FechaNacimiento'=>'required|date',
             'Sexo'=>'required|string|max:100',
             'Foto'=>'required|max:10000|mimes:jpeg,png,jpg'
@@ -51,7 +51,9 @@ class EmpleadoController extends Controller
         $mensaje=[
             'required'=>'El :attribute es requerido',
             'Foto.required'=>'La Foto es requerida',
-            'FechaNacimiento.required'=>'La Fecha de Nacimiento es requerida'
+            'FechaNacimiento.required'=>'La Fecha de Nacimiento es requerida',
+            'Documento.unique' => 'El documento ya existe en la base de datos. Por favor ingrese otro.',
+            'Correo.unique' => 'El correo ya existe. Por favor ingrese otro.'
         ];
 
             $this->validate($request, $campos, $mensaje);
