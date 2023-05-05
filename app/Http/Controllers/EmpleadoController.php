@@ -114,6 +114,7 @@ class EmpleadoController extends Controller
         if ($request->hasFile('Foto')) {
             $campos= ['Foto'=>'required|max:10000|mimes:jpeg,png,jpg'];
             $mensaje=['Foto.required'=>'La Foto es requerida'];
+            
         }
 
             $this->validate($request, $campos, $mensaje);

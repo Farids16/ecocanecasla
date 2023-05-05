@@ -1,4 +1,4 @@
-<h1>{{$modo}} empleado</h1>
+<h1>Hola {{$modo}} empleado</h1>
 
     @if(count($errors)>0)
 
